@@ -20,11 +20,11 @@ async function startPlayground() {
     const { visitorId, confidence, components } = await getVisitorData()
     const totalTime = Date.now() - startTime
     output.innerHTML = ''
-    addOutputSection({ output, header: 'Visitor identifier:', content: visitorId, size: 'giant' })
-    addOutputSection({ output, header: 'Time took to get the identifier:', content: `${totalTime}ms`, size: 'big' })
+    addOutputSection({ output, header: 'Visitor identifier :', content: visitorId, size: 'giant' })
+    addOutputSection({ output, header: 'Time took to get the identifier :', content: `${totalTime}ms`, size: 'big' })
     addOutputSection({
       output,
-      header: 'Confidence score:',
+      header: 'Confidence score :',
       content: String(confidence.score),
       comment: confidence.comment && {
         html: confidence.comment.replace(
@@ -34,14 +34,14 @@ async function startPlayground() {
       },
       size: 'big',
     })
-    addOutputSection({ output, header: 'User agent:', content: navigator.userAgent })
+    addOutputSection({ output, header: 'User agent :', content: navigator.userAgent })
     addOutputSection({
       output,
-      header: 'Entropy components:',
+      header: 'Entropy components :',
       content: FingerprintJS.componentsToDebugString(components),
     })
 
-    initializeDebugButtons(`Visitor identifier: \`${visitorId}\`
+    initializeDebugButtons(`Visitor identifier : \`${visitorId}\`
 Time took to get the identifier: ${totalTime}ms
 Confidence: ${JSON.stringify(confidence)}
 User agent: \`${navigator.userAgent}\`
@@ -53,9 +53,9 @@ ${FingerprintJS.componentsToDebugString(components)}
     const totalTime = Date.now() - startTime
     const errorData = error instanceof Error ? errorToObject(error) : error
     output.innerHTML = ''
-    addOutputSection({ output, header: 'Unexpected error:', content: JSON.stringify(errorData, null, 2) })
-    addOutputSection({ output, header: 'Time passed before the error:', content: `${totalTime}ms`, size: 'big' })
-    addOutputSection({ output, header: 'User agent:', content: navigator.userAgent })
+    addOutputSection({ output, header: 'Unexpected error :', content: JSON.stringify(errorData, null, 2) })
+    addOutputSection({ output, header: 'Time passed before the error :', content: `${totalTime}ms`, size: 'big' })
+    addOutputSection({ output, header: 'User agent :', content: navigator.userAgent })
 
     initializeDebugButtons(`Unexpected error:\n
 \`\`\`

@@ -18,7 +18,7 @@ const commonInput = {
 }
 
 const commonOutput = {
-  name: 'FingerprintJS',
+  name: 'FP',
   exports: 'named' as const,
   plugins: [
     licensePlugin({
@@ -44,12 +44,12 @@ const config: RollupOptions[] = [
       // IIFE for users who use Require.js or Electron and want to just call `window.FingerprintJS.load()`
       {
         ...commonOutput,
-        file: `${outputDirectory}/fp.js`,
+        file: `${outputDirectory}/print.js`,
         format: 'iife',
       },
       {
         ...commonOutput,
-        file: `${outputDirectory}/fp.min.js`,
+        file: `${outputDirectory}/print.min.js`,
         format: 'iife',
         plugins: [commonTerser, ...commonOutput.plugins],
       },
@@ -57,12 +57,12 @@ const config: RollupOptions[] = [
       // UMD for users who use Require.js or Electron and want to leverage them
       {
         ...commonOutput,
-        file: `${outputDirectory}/fp.umd.js`,
+        file: `${outputDirectory}/print.umd.js`,
         format: 'umd',
       },
       {
         ...commonOutput,
-        file: `${outputDirectory}/fp.umd.min.js`,
+        file: `${outputDirectory}/print.umd.min.js`,
         format: 'umd',
         plugins: [commonTerser, ...commonOutput.plugins],
       },
@@ -77,14 +77,14 @@ const config: RollupOptions[] = [
       // CJS for usage with `require()`
       {
         ...commonOutput,
-        file: `${outputDirectory}/fp.cjs.js`,
+        file: `${outputDirectory}/print.cjs.js`,
         format: 'cjs',
       },
 
       // ESM for usage with `import`
       {
         ...commonOutput,
-        file: `${outputDirectory}/fp.esm.js`,
+        file: `${outputDirectory}/print.esm.js`,
         format: 'esm',
       },
     ],
@@ -96,7 +96,7 @@ const config: RollupOptions[] = [
     plugins: [dtsPlugin()],
     output: {
       ...commonOutput,
-      file: `${outputDirectory}/fp.d.ts`,
+      file: `${outputDirectory}/print.d.ts`,
       format: 'esm',
     },
   },

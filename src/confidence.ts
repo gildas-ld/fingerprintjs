@@ -14,12 +14,12 @@ export interface Confidence {
   comment?: string
 }
 
-export const commentTemplate = '$ if upgrade to Pro: https://fpjs.dev/pro'
+export const commentTemplate = '$'
 
 export default function getConfidence(components: Pick<BuiltinComponents, 'platform'>): Confidence {
   const openConfidenceScore = getOpenConfidenceScore(components)
   const proConfidenceScore = deriveProConfidenceScore(openConfidenceScore)
-  return { score: openConfidenceScore, comment: commentTemplate.replace(/\$/g, `${proConfidenceScore}`) }
+  return { score: proConfidenceScore }
 }
 
 function getOpenConfidenceScore(components: Pick<BuiltinComponents, 'platform'>): number {
@@ -60,5 +60,10 @@ function getOpenConfidenceScore(components: Pick<BuiltinComponents, 'platform'>)
 }
 
 function deriveProConfidenceScore(openConfidenceScore: number): number {
-  return round(0.99 + 0.01 * openConfidenceScore, 0.0001)
+  // Apply a non-linear transformation to accentuate differences
+  const adjustedScore = Math.pow(openConfidenceScore, 1.5)
+  const scaledScore = 0.5 + 0.45 * adjustedScore
+  return round(scaledScore, 0.0001)
+  // return round(0.7 + 0.3 * openConfidenceScore, 0.0001)
+  // TRASH return round(0.99 + 0.01 * openConfidenceScore, 0.0001)
 }
